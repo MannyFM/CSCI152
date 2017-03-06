@@ -15,7 +15,7 @@ import ToolBox.ADTs.SortedQueue.impl.LinkedListSortedQueue;
 public class SortedQueueTester {
 
   public static void main(String[] args) {
-	SortedQueue<Integer> q = new LinkedListSortedQueue();
+	SortedQueue<Integer> q = new LinkedListSortedQueue<>();
 	for (int i = 0; i < 5; i++) {
 	  q.insert(i);
 //	  System.out.println(q);

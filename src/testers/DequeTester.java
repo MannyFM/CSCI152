@@ -15,7 +15,7 @@ import ToolBox.ADTs.Deque.impl.DLLDeque;
 public class DequeTester {
 
   public static void main(String[] args) {
-	Deque<Integer> deque = new DLLDeque();
+	Deque<Integer> deque = new DLLDeque<>();
 	for (int i = 0; i < 7; i++) {
 	  deque.pushToBack(i);
 	}

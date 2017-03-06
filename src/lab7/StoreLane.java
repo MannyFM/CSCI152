@@ -21,7 +21,7 @@ public class StoreLane {
 
   public StoreLane(int laneNumber) {
 	this.laneNumber = laneNumber;
-	this.line = new LinkedListQueue();
+	this.line = new LinkedListQueue<>();
 	this.beingServed = null;
   }
 

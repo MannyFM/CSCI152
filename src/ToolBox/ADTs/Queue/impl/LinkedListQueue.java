@@ -11,6 +11,7 @@ import ToolBox.util.LLNode;
 /**
  *
  * @author manny
+ * @param <T>
  */
 public class LinkedListQueue<T> implements Queue<T>{
 
@@ -24,7 +25,7 @@ public class LinkedListQueue<T> implements Queue<T>{
   
   @Override
   public void enqueue(T value) {
-	LLNode<T> newNode = new LLNode(value);
+	LLNode<T> newNode = new LLNode<>(value);
 	if (size > 0) {
 	  tail.setNext(newNode);
 	}

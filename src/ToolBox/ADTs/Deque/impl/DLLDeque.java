@@ -25,7 +25,7 @@ public class DLLDeque<T> implements Deque<T> {
 
   @Override
   public void pushToFront(T value) {
-	DLLNode<T> newNode = new DLLNode(value);
+	DLLNode<T> newNode = new DLLNode<>(value);
 	if (size == 0) {
 	  head = tail = newNode;
 	} else {
@@ -38,7 +38,7 @@ public class DLLDeque<T> implements Deque<T> {
 
   @Override
   public void pushToBack(T value) {
-	DLLNode<T> newNode = new DLLNode(value);
+	DLLNode<T> newNode = new DLLNode<>(value);
 	if (size == 0) {
 	  head = tail = newNode;
 	} else {
@@ -97,7 +97,7 @@ public class DLLDeque<T> implements Deque<T> {
   @Override
   public String toString() {
 	String res = "";
-	DLLNode tmp = head;
+	DLLNode<T> tmp = head;
 	while (tmp != null) {
 	  res += tmp;
 	  if (tmp.getNext() != null)

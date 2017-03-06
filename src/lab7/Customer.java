@@ -21,7 +21,7 @@ public class Customer {
 
   public Customer(String name) {
 	this.name = name;
-	this.itemsToScan = new LinkedListQueue();
+	this.itemsToScan = new LinkedListQueue<>();
   }
 
   /* Adds the given item name to the queue. */

@@ -11,7 +11,7 @@ package ToolBox.util;
  * @param <T>
  */
 public class LLNode<T> {
-  private LLNode link;
+  private LLNode<T> link;
   private T value;
   
   public LLNode(T value) {
@@ -19,11 +19,11 @@ public class LLNode<T> {
 	this.value = value;
   }
   
-  public LLNode getNext() {
+  public LLNode<T> getNext() {
 	return this.link;
   }
   
-  public void setNext(LLNode link) {
+  public void setNext(LLNode<T> link) {
 	this.link = link;
   }
   

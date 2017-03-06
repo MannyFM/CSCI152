@@ -10,12 +10,14 @@ import ToolBox.ADTs.Queue.Queue;
 /**
  *
  * @author manny
+ * @param <T>
  */
-public class ArrayQueue<T> implements Queue<T>{
+public class ArrayQueue<T> implements Queue<T> {
 
   private T[] values;
   private int front, size;
 
+  @SuppressWarnings("unchecked")
   public ArrayQueue() {
 	values = (T[]) new Object[10];
 	front = size = 0;
@@ -24,6 +26,7 @@ public class ArrayQueue<T> implements Queue<T>{
   @Override
   public void enqueue(T value) {
 	if (this.size >= values.length) {
+	  @SuppressWarnings("unchecked")
 	  T[] newValues = (T[]) new Object[2 * values.length];
 	  for (int i = 0; i < size; i++) {
 		newValues[i] = values[(front + i) % values.length];
@@ -65,8 +68,9 @@ public class ArrayQueue<T> implements Queue<T>{
   public String toString() {
 	String res = "";
 	for (int i = 0; i < size; i++) {
-	  if (i > 0)
+	  if (i > 0) {
 		res += ", ";
+	  }
 	  res += values[(front + i) % values.length];
 	}
 	return "[" + res + "]";

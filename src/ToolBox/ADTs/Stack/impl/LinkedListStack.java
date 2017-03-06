@@ -25,7 +25,7 @@ public class LinkedListStack<T> implements Stack<T> {
   
   @Override
   public void push(T value) {
-	LLNode node = new LLNode(value);
+	LLNode<T> node = new LLNode<>(value);
 	node.setNext(this.head);
 	this.head = node;
 	size++;
@@ -55,7 +55,7 @@ public class LinkedListStack<T> implements Stack<T> {
   @Override
   public String toString() {
 	String res = "";
-	LLNode tmp = this.head;
+	LLNode<T> tmp = this.head;
 	boolean first = true;
 	while (tmp != null) {
 	  if (!first) {

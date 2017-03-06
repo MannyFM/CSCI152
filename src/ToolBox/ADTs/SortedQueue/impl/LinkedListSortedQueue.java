@@ -13,7 +13,7 @@ import ToolBox.util.LLNode;
  * @author manny
  * @param <T>
  */
-public class LinkedListSortedQueue<T extends Comparable> implements SortedQueue<T> {
+public class LinkedListSortedQueue<T extends Comparable<? super T>> implements SortedQueue<T> {
 
   private LLNode<T> head;
   private int size;
@@ -26,7 +26,7 @@ public class LinkedListSortedQueue<T extends Comparable> implements SortedQueue<
   @Override
   public void insert(T value) {
 	size++;
-	LLNode<T> newNode = new LLNode(value);
+	LLNode<T> newNode = new LLNode<T>(value);
 	if (size == 1) {
 	  head = newNode;
 	  return;
@@ -75,7 +75,7 @@ public class LinkedListSortedQueue<T extends Comparable> implements SortedQueue<
   @Override
   public String toString() {
 	String res = "";
-	LLNode tmp = this.head;
+	LLNode<T> tmp = this.head;
 	while (tmp != null) {
 	  res += tmp.getValue();
 	  if (tmp.getNext() != null)

@@ -17,7 +17,7 @@ import ToolBox.ADTs.Stack.impl.LinkedListStack;
 public class Lab6Tester {
 
   public static void main(String[] args) {
-	Queue<Character> q = new LinkedListQueue();
+	Queue<Character> q = new LinkedListQueue<>();
 	for (char a = 'a'; a <= 'd'; a++) {
 	  q.enqueue(a);
 	}
@@ -50,7 +50,7 @@ public class Lab6Tester {
   }
 
   public static void reverseQueue(Queue<Character> q) throws Exception {
-	Stack<Character> tmp = new LinkedListStack();
+	Stack<Character> tmp = new LinkedListStack<>();
 	while (q.getSize() > 0) {
 	  tmp.push(q.dequeue());
 	}
@@ -76,9 +76,9 @@ public class Lab6Tester {
   }
 
   public static Queue<Character> copyQueue(Queue<Character> q) throws Exception {
-	Queue<Character> tmp = new LinkedListQueue();
+	Queue<Character> tmp = new LinkedListQueue<>();
 	for (int i = 0; i < q.getSize(); i++) {
-	  Character val = q.dequeue();
+	  char val = q.dequeue();
 	  q.enqueue(val);
 	  tmp.enqueue(val);
 	}

@@ -15,7 +15,8 @@ public class DLLNode<T> {
   private T value;
   
   public DLLNode(T value) {
-	this.next = this.previous = null;
+	this.next = null;
+	this.previous = null;
 	this.value = value;
   }
   

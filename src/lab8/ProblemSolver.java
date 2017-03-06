@@ -15,7 +15,7 @@ import ToolBox.ADTs.Deque.impl.DLLDeque;
 public class ProblemSolver {
 
   public static void main(String[] args) {
-	Deque<Integer> deq = new DLLDeque();
+	Deque<Integer> deq = new DLLDeque<>();
 	for (int i = 1; i <= 10; i++) {
 	  deq.pushToBack(i);
 	}
@@ -39,7 +39,7 @@ public class ProblemSolver {
   }
 
   public static Deque<Integer> copyDeque(Deque<Integer> deq) throws Exception {
-	Deque<Integer> res = new DLLDeque();
+	Deque<Integer> res = new DLLDeque<>();
 	for (int i = 0; i < deq.getSize(); i++) {
 	  int tmp = deq.popFromFront();
 	  res.pushToBack(tmp);
@@ -64,7 +64,7 @@ public class ProblemSolver {
   }
 
   public static void shuffle(Deque<Integer> deq) throws Exception {
-	Deque<Integer> tmp = new DLLDeque();
+	Deque<Integer> tmp = new DLLDeque<>();
 	while (deq.getSize() > 0) {
 	  int x = deq.popFromFront();
 	  int y = deq.popFromBack();

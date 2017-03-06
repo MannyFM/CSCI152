@@ -16,7 +16,7 @@ import ToolBox.ADTs.Stack.Stack;
 public class StackTester {
 
   public static void main(String[] args) throws Exception {
-	Stack<Integer> st = new LinkedListStack();
+	Stack<Integer> st = new LinkedListStack<>();
 	for (int i = 0; i < 5; i++) {
 	  st.push(i);
 	}
@@ -25,7 +25,7 @@ public class StackTester {
 	repeater(st);
 	System.out.println(st + "\n");
 
-	Stack tmp = copy(st);
+	Stack<Integer> tmp = copy(st);
 	for (int i = 0; i < 5; i++) {
 	  tmp.pop();
 	}
@@ -33,16 +33,16 @@ public class StackTester {
 	System.out.println(tmp + "\n");
   }
 
-  public static void repeater(Stack st) {
+  public static void repeater(Stack<Integer> st) {
 	try {
-	  Stack tmp = new ArrayStack();
+	  Stack<Integer> tmp = new ArrayStack<>();
 	  while (st.getSize() > 0) {
-		Object val = st.pop();
+		int val = st.pop();
 		tmp.push(val);
 	  }
 
 	  while (tmp.getSize() > 0) {
-		Object val = tmp.pop();
+		int val = tmp.pop();
 		st.push(val);
 		st.push(val);
 	  }
@@ -52,17 +52,17 @@ public class StackTester {
 	}
   }
 
-  public static Stack copy(Stack st) {
-	Stack tmp = new ArrayStack();
-	Stack res = new ArrayStack();
+  public static Stack<Integer> copy(Stack<Integer> st) {
+	Stack<Integer> tmp = new ArrayStack<>();
+	Stack<Integer> res = new ArrayStack<>();
 	try {
 	  while (st.getSize() > 0) {
-		Object val = st.pop();
+		int val = st.pop();
 		tmp.push(val);
 	  }
 
 	  while (tmp.getSize() > 0) {
-		Object val = tmp.pop();
+		int val = tmp.pop();
 		st.push(val);
 		res.push(val);
 	  }
