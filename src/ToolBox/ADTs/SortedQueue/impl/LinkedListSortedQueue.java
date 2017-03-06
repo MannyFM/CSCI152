@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ToolBox.ADTs.SortedQueue.imlp;
+package ToolBox.ADTs.SortedQueue.impl;
 
 import ToolBox.ADTs.SortedQueue.SortedQueue;
 import ToolBox.util.LLNode;

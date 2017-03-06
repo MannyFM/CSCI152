@@ -10,8 +10,8 @@
  */
 public class MainRunner {
 
-  public static void main(String[] args) {
-	int choose = 3;
+  public static void main(String[] args) throws Exception {
+	int choose = 4;
 	if (choose == 0) {
 //	Store Tester
 	  System.out.println("StoreTest:");
@@ -31,7 +31,13 @@ public class MainRunner {
 	}
 	
 	if (choose == 3) {
-//	SortedQueue Tester
+//	Stack Tester
+	  System.out.println("StackTester:");
+	  testers.StackTester.main(args);
+	}
+	
+	if (choose == 4) {
+//	Lab8
 	  System.out.println("lab8.ProblemSolver:");
 	  lab8.ProblemSolver.main(args);
 	}

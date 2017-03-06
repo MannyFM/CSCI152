@@ -6,7 +6,7 @@
 package testers;
 
 import ToolBox.ADTs.SortedQueue.SortedQueue;
-import ToolBox.ADTs.SortedQueue.imlp.LinkedListSortedQueue;
+import ToolBox.ADTs.SortedQueue.impl.LinkedListSortedQueue;
 
 /**
  *
