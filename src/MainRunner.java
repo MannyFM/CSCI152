@@ -11,7 +11,7 @@
 public class MainRunner {
 
   public static void main(String[] args) throws Exception {
-	int choose = 5;
+	int choose = 6;
 	if (choose == 0) {
 //	Store Tester
 	  System.out.println("StoreTest:");
@@ -46,6 +46,12 @@ public class MainRunner {
 //	Treat Tester
 	  System.out.println("testers.TreapTester:");
 	  testers.TreapTester.main(args);
+	}
+	
+	if (choose == 6) {
+//	Red-Black Tree Set Tester
+	  System.out.println("testers.RBTSetTester:");
+	  testers.RBTSetTester.main(args);
 	}
   }
 }
