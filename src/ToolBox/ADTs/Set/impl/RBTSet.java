@@ -12,11 +12,12 @@ import ToolBox.ADTs.Set.Set;
  * @author manny
  * @param <T>
  */
-public class RBTSet<T extends Comparable<T>> implements Set<T> {
+public class RBTSet<T extends Comparable<? super T>> implements Set<T> {
 
   private static final boolean RED = true;
   private static final boolean BLACK = true;
   private Node root;
+  private Node nil;
   private int size;
 
   private class Node {
@@ -32,226 +33,46 @@ public class RBTSet<T extends Comparable<T>> implements Set<T> {
 	  this.value = value;
 	  this.color = RED;
 	}
-	
-  @Override
-  public String toString() {
-	String res = "";
-	if (left != null)
-	  res += left + ", ";
-	res += value;
-	if (right != null)
-	  res += ", " + right;
-	return res;
+
+	public Node(T value, Node left, Node right, Node parent, boolean color) {
+	  this.value = value;
+	  this.left = left;
+	  this.right = right;
+	  this.parent = parent;
+	  this.color = color;
 	}
-  
+
+	@Override
+	public String toString() {
+	  String res = "";
+	  if (left != null) {
+		res += left + ", ";
+	  }
+	  res += value;
+	  if (right != null) {
+		res += ", " + right;
+	  }
+	  return res;
+	}
+
   }
 
   public RBTSet() {
-	root = null;
+	//Nil Node initialize
+	nil = new Node(null, nil, nil, nil, BLACK);
+
+	root = nil;
 	size = 0;
-  }
-
-  Node getGrandparent(Node node) {
-	if (node == null) {
-	  return node;
-	}
-	Node batya = node.parent;
-	if (batya == null) {
-	  return null;
-	}
-	return batya.parent;
-  }
-
-  Node getUncle(Node node) {
-	if (node == null) {
-	  return node;
-	}
-	Node batya = node.parent;
-	if (batya == null) {
-	  return null;
-	}
-	Node grandbatya = batya.parent;
-	if (grandbatya == null) {
-	  return null;
-	}
-	if (grandbatya.left == batya) {
-	  return grandbatya.right;
-	} else {
-	  return grandbatya.left;
-	}
-  }
-
-  private void rotateLeft(Node tree) {
-	Node pivot = tree.right;
-
-	pivot.parent = tree.parent;
-	if (tree.parent == null) {
-	  root = pivot;
-	} else {
-	  if (tree.parent.left == tree) {
-		tree.parent.left = pivot;
-	  } else {
-		tree.parent.right = pivot;
-	  }
-	}
-	tree.right = pivot.left;
-	if (pivot.left != null) {
-	  pivot.left.parent = tree;
-	}
-
-	tree.parent = pivot;
-	pivot.left = tree;
-  }
-
-  private void rotateRight(Node tree) {
-	Node pivot = tree.left;
-
-	pivot.parent = tree.parent;
-	if (tree.parent == null) {
-	  root = pivot;
-	} else {
-	  if (tree.parent.right == tree) {
-		tree.parent.right = pivot;
-	  } else {
-		tree.parent.left = pivot;
-	  }
-	}
-	tree.left = pivot.right;
-	if (pivot.right != null) {
-	  pivot.right.parent = tree;
-	}
-
-	tree.parent = pivot;
-	pivot.right = tree;
-  }
-
-  private void add(Node tree, Node newNode) {
-	if (tree == null) {
-	  return;
-	}
-	if (tree.value.compareTo(newNode.value) > 0) {
-	  if (tree.left == null) {
-		tree.left = newNode;
-		newNode.parent = tree;
-	  } else {
-		add(tree.left, newNode);
-	  }
-	} else {
-	  if (tree.right == null) {
-		tree.right = newNode;
-		newNode.parent = tree;
-	  } else {
-		add(tree.right, newNode);
-	  }
-	}
-  }
-
-  private void insert_case1(Node node) {
-	if (node.parent == null) {
-	  node.color = BLACK;
-	} else
-	  insert_case2(node);
-  }
-
-  private void insert_case2(Node node) {
-	if (node.parent.color == BLACK)
-	  return;
-	else
-	  insert_case3(node);
-  }
-
-  private void insert_case3(Node node) {
-	Node uncle, grandbatya, batya;
-	uncle = getUncle(node);
-	grandbatya = getGrandparent(node);
-	batya = node.parent;
-	
-	if ((uncle != null) && (uncle.color == RED) && batya.color == RED) {
-	  batya.color = BLACK;
-	  uncle.color = BLACK;
-	  grandbatya.color = RED;
-	  insert_case1(grandbatya);
-	} else 
-	  insert_case4(node);
-  }
-
-  private void insert_case4(Node node) {
-	Node grandbatya, batya;
-	grandbatya = getGrandparent(node);
-	batya = node.parent;
-	if ((node == batya.right) && (batya == grandbatya.left)) {
-	  rotateLeft(batya);
-	  node = node.left;
-	} else if ((node == batya.left) && (batya == grandbatya.right)) {
-	  rotateRight(batya);
-	  node = node.right;
-	}
-	insert_case5(node);
-  }
-
-  private void insert_case5(Node node) {
-	Node grandbatya, batya;
-	grandbatya = getGrandparent(node);
-	batya = node.parent;
-	
-	batya.color = BLACK;
-	grandbatya.color = RED;
-	if ((node == batya.left) && (batya == grandbatya.left)) {
-	  rotateLeft(grandbatya);
-	} else {
-	  rotateRight(grandbatya);
-	}
-  }
-
-  private boolean contains(Node root, T value) {
-	if (root == null) {
-	  return false;
-	}
-	int cmp = root.value.compareTo(value);
-	if (cmp == 0) {
-	  return true;
-	}
-	if (cmp < 0) {
-	  return contains(root.left, value);
-	} else {
-	  return contains(root.right, value);
-	}
-  }
-
-  private String out(Node tree, int lvl) {
-	String res = "";
-	if (tree == null)
-	  return res;
-	for (int i = 0; i < lvl; i++)
-	  res += " ";
-	res += tree.value + "\n";
-	if (tree.left != null) {
-	  res += "l" + out(tree.left, lvl + 1);
-	}
-	if (tree.right != null) {
-	  res += "r" + out(tree.right, lvl + 1);
-	}
-	return res;
   }
 
   @Override
   public void add(T value) {
-	if (this.contains(value)) {
-	  return;
-	}
-	size++;
-	Node newNode = new Node(value);
-	if (root == null) {
-	  root = newNode;
-	} else {
-	  add(root, newNode);
-	}
-	insert_case1(newNode);
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
   public boolean contains(T value) {
-	return contains(root, value);
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
@@ -266,13 +87,12 @@ public class RBTSet<T extends Comparable<T>> implements Set<T> {
 
   @Override
   public int getSize() {
-	return this.size;
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
   public void clear() {
-	root = null;
-	size = 0;
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
@@ -280,4 +100,124 @@ public class RBTSet<T extends Comparable<T>> implements Set<T> {
 //	return out(root, 0) + "[" + root + "]";
 	return "[" + root + "]";
   }
+
+  private String out(Node tree, int lvl) {
+	String res = "";
+	if (tree == null) {
+	  return res;
+	}
+	for (int i = 0; i < lvl; i++) {
+	  res += " ";
+	}
+	res += tree.value + "\n";
+	if (tree.left != null) {
+	  res += "l" + out(tree.left, lvl + 1);
+	}
+	if (tree.right != null) {
+	  res += "r" + out(tree.right, lvl + 1);
+	}
+	return res;
+  }
+
+  private void rotateLeft(Node tree) {
+	Node pivot = tree.right;
+	tree.right = pivot.left;
+	if (pivot.left != nil) {
+	  pivot.left.parent = tree;
+	}
+	pivot.parent = tree.parent;
+	if (tree.parent == nil) {
+	  root = pivot;
+	} else if (tree == tree.parent.left) {
+	  tree.parent.left = pivot;
+	} else {
+	  tree.parent.right = pivot;
+	}
+	pivot.left = tree;
+	tree.parent = pivot;
+  }
+
+  private void rotateRight(Node tree) {
+	Node pivot = tree.left;
+	tree.left = pivot.right;
+	if (pivot.right != nil) {
+	  pivot.right.parent = tree;
+	}
+	pivot.parent = tree.parent;
+	if (tree.parent == nil) {
+	  root = pivot;
+	} else if (tree == tree.parent.right) {
+	  tree.parent.right = pivot;
+	} else {
+	  tree.parent.left = pivot;
+	}
+	pivot.right = tree;
+	tree.parent = pivot;
+  }
+
+  private void insert(Node newNode) {
+	Node previous = nil;
+	Node tmp = this.root;
+	while (tmp != nil) {
+	  previous = tmp;
+	  if (newNode.value.compareTo(tmp.value) < 0) {
+		tmp = tmp.left;
+	  } else {
+		tmp = tmp.right;
+	  }
+	}
+	if (previous == nil) {
+	  this.root = newNode;
+	} else if (newNode.value.compareTo(previous.value) < 0) {
+	  previous.left = newNode;
+	} else {
+	  previous.right = newNode;
+	}
+	newNode.left = nil;
+	newNode.right = nil;
+	newNode.color = RED;
+	insertFix(newNode);
+  }
+
+  private void insertFix(Node node) {
+	while (node.parent.color == RED) {
+	  if (node.parent == node.parent.parent.left) {
+		//Parent is left child
+		Node uncle = node.parent.parent.right;
+		if (uncle.color == RED) {
+		  node.parent.color = BLACK;
+		  uncle.color = BLACK;
+		  node.parent.parent.color = RED;
+		  node = node.parent.parent;
+		} else {
+		  if (node == node.parent.right) {
+			node = node.parent;
+			rotateLeft(node);
+		  }
+		  node.parent.color = BLACK;
+		  node.parent.parent.color = RED;
+		  rotateRight(node.parent.parent);
+		}
+	  } else {
+		//Parent is right child
+		Node uncle = node.parent.parent.left;
+		if (uncle.color == RED) {
+		  node.parent.color = BLACK;
+		  uncle.color = BLACK;
+		  node.parent.parent.color = RED;
+		  node = node.parent.parent;
+		} else {
+		  if (node == node.parent.left) {
+			node = node.parent;
+			rotateRight(node);
+		  }
+		  node.parent.color = BLACK;
+		  node.parent.parent.color = RED;
+		  rotateLeft(node.parent.parent);
+		}
+	  }
+	}
+	this.root.color = BLACK;
+  }
+
 }
