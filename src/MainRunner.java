@@ -53,5 +53,11 @@ public class MainRunner {
 	  System.out.println("testers.RBTSetTester:");
 	  testers.RBTSetTester.main(args);
 	}
+	
+	if (choose == 7) {
+//	LAB 10. Employee Tester
+	  System.out.println("lab10.EmployeeTester:");
+	  lab10.EmployeeTester.main(args);
+	}
   }
 }
