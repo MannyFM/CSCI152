@@ -16,9 +16,9 @@ import ToolBox.ADTs.Set.Set;
  */
 public class LLQueueSet<T extends Comparable<? super T>> implements Set<T> {
 
-  Queue<T> queue;
+  private Queue<T> queue;
 
-  LLQueueSet() {
+  public LLQueueSet() {
 	queue = new LinkedListQueue<>();
   }
 
@@ -70,7 +70,7 @@ public class LLQueueSet<T extends Comparable<? super T>> implements Set<T> {
 	try {
 	  return queue.dequeue();
 	} catch (Exception ex) {
-		throw new Exception("Set is empty");
+	  throw new Exception("Set is empty");
 	}
   }
 

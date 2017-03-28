@@ -9,7 +9,7 @@ package ToolBox.ADTs.Set;
  * A generic set
  * @param <T>
  */
-public interface Set<T extends Comparable<? super T>> {
+public interface Set<T extends Comparable> {
     
     /**
      * Adds the given element to the set, if another 

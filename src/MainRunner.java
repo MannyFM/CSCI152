@@ -11,7 +11,7 @@
 public class MainRunner {
 
   public static void main(String[] args) throws Exception {
-	int choose = 6;
+	int choose = 8;
 	if (choose == 0) {
 //	Store Tester
 	  System.out.println("StoreTest:");
@@ -43,7 +43,7 @@ public class MainRunner {
 	}
 
 	if (choose == 5) {
-//	Treat Tester
+//	Treap Tester
 	  System.out.println("testers.TreapTester:");
 	  testers.TreapTester.main(args);
 	}
@@ -59,5 +59,12 @@ public class MainRunner {
 	  System.out.println("lab10.EmployeeTester:");
 	  lab10.EmployeeTester.main(args);
 	}
+	
+	if (choose == 8) {
+//	Set Tester
+	  System.out.println("testers.SetTester:");
+	  testers.SetTester.main(args);
+	}
+	
   }
 }
