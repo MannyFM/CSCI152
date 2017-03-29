@@ -7,17 +7,18 @@ package testers;
 
 import ToolBox.ADTs.Set.Set;
 import ToolBox.ADTs.Set.impl.LLQSHashTable;
-import ToolBox.ADTs.Set.impl.LLQueueSet;
+import ToolBox.ADTs.Set.impl.BSTHashTable;
+
 /**
  *
  * @author manny
  */
 public class SetTester {
-  
+
   public static void main(String[] args) throws Exception {
 	Set<Integer> set;
-	set = new LLQSHashTable<>();
-	
+	set = new BSTHashTable<>();
+
 	int N = 10;
 	int maxVal = N * 2;
 	for (int i = 0; i < N; i++) {
@@ -35,10 +36,11 @@ public class SetTester {
 		System.out.println(i + "+");
 	  }
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++) {
 	  System.out.println(set.removeAny());
-	System.out.println(set);
-	
+	  System.out.println(set);
+	}
+
 	for (int i = 0; i <= maxVal; i++) {
 	  if (set.remove(i)) {
 		System.out.println(i + "+");

@@ -59,6 +59,7 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 		tmp = tmp.right;
 	  }
 	}
+	size++;
 	if (previous == null) {
 	  //Tree is empty
 	  root = newNode;
@@ -67,11 +68,9 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 	if (value.compareTo(previous.value) < 0) {
 	  previous.left = newNode;
 	  newNode.parent = previous;
-	  size++;
 	} else {
 	  previous.right = newNode;
 	  newNode.parent = previous;
-	  size++;
 	}
   }
 
@@ -88,12 +87,21 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 	  return false;
 	}
 	removeHelper(node);
+	size--;
 	return true;
   }
 
   @Override
   public T removeAny() throws Exception {
-	throw new UnsupportedOperationException("Not supported yet.");
+	if (root == null) {
+	  if (size != 0) {
+		throw new Exception("Something really bad happened");
+	  }
+	  throw new Exception("Set is empty");
+	}
+	T result = root.value;
+	remove(result);
+	return result;
   }
 
   @Override
@@ -110,7 +118,7 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
   @Override
   public String toString() {
 //	return out(root, 0) + "[" + root + "]";
-	return "[" + (root == null ? " " : root) + "]";
+	return "[" + (root == null ? "" : root) + "(" + size + ")]";
   }
 
   private Node find(T value) {

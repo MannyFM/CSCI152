@@ -12,21 +12,21 @@ import ToolBox.ADTs.Set.Set;
  * @author manny
  * @param <T>
  */
-public class LLQSHashTable<T extends Comparable<? super T>> implements Set<T> {
+public class BSTHashTable<T extends Comparable<? super T>> implements Set<T> {
 
-  private LLQueueSet<T>[] buckets;
+  private BSTSet<T>[] buckets;
   final private int numberOfBuckets;
   private int size;
 
-  public LLQSHashTable() {
+  public BSTHashTable() {
 	this.numberOfBuckets = 10;
-	buckets = new LLQueueSet[numberOfBuckets];
+	buckets = new BSTSet[numberOfBuckets];
 	size = 0;
   }
 
-  public LLQSHashTable(int numberOfBuckets) {
+  public BSTHashTable(int numberOfBuckets) {
 	this.numberOfBuckets = numberOfBuckets;
-	buckets = new LLQueueSet[this.numberOfBuckets];
+	buckets = new BSTSet[this.numberOfBuckets];
 	size = 0;
   }
 
@@ -42,7 +42,7 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements Set<T> {
   public void add(T value) {
 	int index = getIndex(value);
 	if (buckets[index] == null) {
-	  buckets[index] = new LLQueueSet<>();
+	  buckets[index] = new BSTSet<>();
 	}
 	size -= buckets[index].getSize();
 	buckets[index].add(value);
@@ -92,7 +92,7 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements Set<T> {
 
   @Override
   public void clear() {
-	buckets = new LLQueueSet[numberOfBuckets];
+	buckets = new BSTSet[numberOfBuckets];
 	size = 0;
   }
 
