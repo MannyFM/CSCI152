@@ -11,7 +11,7 @@
 public class MainRunner {
 
   public static void main(String[] args) throws Exception {
-	int choose = 9;
+	int choose = 11;
 	if (choose == 0) {
 	  //Store Tester
 	  System.out.println("StoreTest:");
@@ -70,6 +70,18 @@ public class MainRunner {
 	  //LAB 11.SetTimeTester
 	  System.out.println("lab11.SetTimeTester:");
 	  lab11.SetTimeTester.main(args);
+	}
+	
+	if (choose == 10) {
+	  //LAB 12.HashTableTester
+	  System.out.println("lab12.HashTableTester:");
+	  lab12.HashTableTester.main(args);
+	}
+	
+	if (choose == 11) {
+	  //Map Tester
+	  System.out.println("testers.MapTester:");
+	  testers.MapTester.main(args);
 	}
   }
 }

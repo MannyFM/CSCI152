@@ -12,7 +12,7 @@ import ToolBox.ADTs.Set.Set;
  * @author manny
  * @param <T>
  */
-public class LLQSHashTable<T extends Comparable<? super T>> implements Set<T> {
+public class LLQSHashTable<T extends Comparable<? super T>> implements HashTableSet<T> {
 
   private LLQueueSet<T>[] buckets;
   final private int numberOfBuckets;
@@ -98,6 +98,53 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements Set<T> {
 
   @Override
   public String toString() {
+	String res = "";
+	for (int i = 0; i < numberOfBuckets; i++) {
+	  if (i > 0) {
+		res += ", ";
+	  }
+	  res += buckets[i];
+	}
+	return "{" + res + "}";
+  }
+
+  @Override
+  public int getNumberOfBuckets() {
+	return this.numberOfBuckets;
+  }
+  
+  @Override
+  public int getBucketSize(int index) throws Exception {
+	if (this.buckets[index] == null) {
+	  return 0;
+	}
+	return this.buckets[index].getSize();
+  }
+
+  @Override
+  public double getLoadFactor() {
+	return (this.size + .0) / this.numberOfBuckets;
+  }
+
+  @Override
+  public double getBucketSizeStandardDev() {
+	double mean = getLoadFactor();
+	double result = 0;
+	for (int i = 0; i < this.numberOfBuckets; i++) {
+	  try {
+		result += (mean - getBucketSize(i)) * (mean - getBucketSize(i));
+	  } catch (Exception ex) {
+		System.out.println("Something really bad happened " + ex);
+	  }
+	}
+	result /= this.numberOfBuckets;
+	result = Math.sqrt(result);
+
+	return result;
+  }
+
+  @Override
+  public String bucketsToString() {
 	String res = "";
 	for (int i = 0; i < numberOfBuckets; i++) {
 	  if (i > 0) {

@@ -6,13 +6,14 @@
 package ToolBox.ADTs.Set.impl;
 
 import ToolBox.ADTs.Set.Set;
+import ToolBox.util.HashTableStats;
 
 /**
  *
  * @author manny
  * @param <T>
  */
-public class BSTHashTable<T extends Comparable<? super T>> implements Set<T> {
+public class BSTHashTable<T extends Comparable<? super T>> implements HashTableSet<T> {
 
   private BSTSet<T>[] buckets;
   final private int numberOfBuckets;
@@ -106,5 +107,45 @@ public class BSTHashTable<T extends Comparable<? super T>> implements Set<T> {
 	  res += buckets[i];
 	}
 	return "{" + res + "}";
+  }
+
+  @Override
+  public int getNumberOfBuckets() {
+	return this.numberOfBuckets;
+  }
+
+  @Override
+  public int getBucketSize(int index) throws Exception {
+	if (this.buckets[index] == null) {
+	  return 0;
+	}
+	return this.buckets[index].getSize();
+  }
+
+  @Override
+  public double getLoadFactor() {
+	return (this.size + .0) / this.numberOfBuckets;
+  }
+
+  @Override
+  public double getBucketSizeStandardDev() {
+	double mean = getLoadFactor();
+	double result = 0;
+	for (int i = 0; i < this.numberOfBuckets; i++) {
+	  try {
+		result += (mean - getBucketSize(i)) * (mean - getBucketSize(i));
+	  } catch (Exception ex) {
+		System.out.println("Something really bad happened " + ex);
+	  }
+	}
+	result /= this.numberOfBuckets;
+	result = Math.sqrt(result);
+
+	return result;
+  }
+
+  @Override
+  public String bucketsToString() {
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 }

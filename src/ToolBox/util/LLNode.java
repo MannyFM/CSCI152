@@ -37,7 +37,7 @@ public class LLNode<T> {
   
   @Override
   public String toString() {
-	return this.value.toString();
+	return value + "";
   }
   
 }
