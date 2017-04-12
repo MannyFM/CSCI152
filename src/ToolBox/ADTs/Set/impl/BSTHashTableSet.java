@@ -6,27 +6,28 @@
 package ToolBox.ADTs.Set.impl;
 
 import ToolBox.ADTs.Set.Set;
+import ToolBox.util.HashTableStats;
 
 /**
  *
  * @author manny
  * @param <T>
  */
-public class LLQSHashTable<T extends Comparable<? super T>> implements HashTableSet<T> {
+public class BSTHashTableSet<T extends Comparable<? super T>> implements HashTableSet<T> {
 
-  private LLQueueSet<T>[] buckets;
+  private BSTSet<T>[] buckets;
   final private int numberOfBuckets;
   private int size;
 
-  public LLQSHashTable() {
+  public BSTHashTableSet() {
 	this.numberOfBuckets = 10;
-	buckets = new LLQueueSet[numberOfBuckets];
+	buckets = new BSTSet[numberOfBuckets];
 	size = 0;
   }
 
-  public LLQSHashTable(int numberOfBuckets) {
+  public BSTHashTableSet(int numberOfBuckets) {
 	this.numberOfBuckets = numberOfBuckets;
-	buckets = new LLQueueSet[this.numberOfBuckets];
+	buckets = new BSTSet[this.numberOfBuckets];
 	size = 0;
   }
 
@@ -42,7 +43,7 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements HashTable
   public void add(T value) {
 	int index = getIndex(value);
 	if (buckets[index] == null) {
-	  buckets[index] = new LLQueueSet<>();
+	  buckets[index] = new BSTSet<>();
 	}
 	size -= buckets[index].getSize();
 	buckets[index].add(value);
@@ -92,7 +93,7 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements HashTable
 
   @Override
   public void clear() {
-	buckets = new LLQueueSet[numberOfBuckets];
+	buckets = new BSTSet[numberOfBuckets];
 	size = 0;
   }
 
@@ -112,7 +113,7 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements HashTable
   public int getNumberOfBuckets() {
 	return this.numberOfBuckets;
   }
-  
+
   @Override
   public int getBucketSize(int index) throws Exception {
 	if (this.buckets[index] == null) {
@@ -145,13 +146,6 @@ public class LLQSHashTable<T extends Comparable<? super T>> implements HashTable
 
   @Override
   public String bucketsToString() {
-	String res = "";
-	for (int i = 0; i < numberOfBuckets; i++) {
-	  if (i > 0) {
-		res += ", ";
-	  }
-	  res += buckets[i];
-	}
-	return "{" + res + "}";
+	throw new UnsupportedOperationException("Not supported yet.");
   }
 }

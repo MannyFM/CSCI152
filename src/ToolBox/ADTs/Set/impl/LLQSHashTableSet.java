@@ -6,28 +6,27 @@
 package ToolBox.ADTs.Set.impl;
 
 import ToolBox.ADTs.Set.Set;
-import ToolBox.util.HashTableStats;
 
 /**
  *
  * @author manny
  * @param <T>
  */
-public class BSTHashTable<T extends Comparable<? super T>> implements HashTableSet<T> {
+public class LLQSHashTableSet<T extends Comparable<? super T>> implements HashTableSet<T> {
 
-  private BSTSet<T>[] buckets;
+  private LLQueueSet<T>[] buckets;
   final private int numberOfBuckets;
   private int size;
 
-  public BSTHashTable() {
+  public LLQSHashTableSet() {
 	this.numberOfBuckets = 10;
-	buckets = new BSTSet[numberOfBuckets];
+	buckets = new LLQueueSet[numberOfBuckets];
 	size = 0;
   }
 
-  public BSTHashTable(int numberOfBuckets) {
+  public LLQSHashTableSet(int numberOfBuckets) {
 	this.numberOfBuckets = numberOfBuckets;
-	buckets = new BSTSet[this.numberOfBuckets];
+	buckets = new LLQueueSet[this.numberOfBuckets];
 	size = 0;
   }
 
@@ -43,7 +42,7 @@ public class BSTHashTable<T extends Comparable<? super T>> implements HashTableS
   public void add(T value) {
 	int index = getIndex(value);
 	if (buckets[index] == null) {
-	  buckets[index] = new BSTSet<>();
+	  buckets[index] = new LLQueueSet<>();
 	}
 	size -= buckets[index].getSize();
 	buckets[index].add(value);
@@ -93,7 +92,7 @@ public class BSTHashTable<T extends Comparable<? super T>> implements HashTableS
 
   @Override
   public void clear() {
-	buckets = new BSTSet[numberOfBuckets];
+	buckets = new LLQueueSet[numberOfBuckets];
 	size = 0;
   }
 
@@ -113,7 +112,7 @@ public class BSTHashTable<T extends Comparable<? super T>> implements HashTableS
   public int getNumberOfBuckets() {
 	return this.numberOfBuckets;
   }
-
+  
   @Override
   public int getBucketSize(int index) throws Exception {
 	if (this.buckets[index] == null) {
@@ -146,6 +145,13 @@ public class BSTHashTable<T extends Comparable<? super T>> implements HashTableS
 
   @Override
   public String bucketsToString() {
-	throw new UnsupportedOperationException("Not supported yet.");
+	String res = "";
+	for (int i = 0; i < numberOfBuckets; i++) {
+	  if (i > 0) {
+		res += ", ";
+	  }
+	  res += buckets[i];
+	}
+	return "{" + res + "}";
   }
 }

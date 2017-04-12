@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ToolBox.ADTs.Set.impl;
+package ToolBox.ADTs.Map.impl;
 
-import ToolBox.ADTs.Set.Set;
+import ToolBox.ADTs.Map.Map;
+import ToolBox.util.KeyValuePair;
 
 /**
  *
  * @author manny
  */
-public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
+public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   private Node root;
   private int size;
@@ -19,9 +20,9 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
   private class Node {
 
 	private Node left, right, parent;
-	private T value;
+	private KeyValuePair<K, V> value;
 
-	public Node(T value) {
+	public Node(KeyValuePair<K, V> value) {
 	  this.left = null;
 	  this.right = null;
 	  this.parent = null;
@@ -43,18 +44,19 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 
   }
 
-  public BSTSet() {
+  public BSTMap() {
 	root = null;
 	size = 0;
   }
   
   @Override
-  public void add(T value) {
-	Node newNode = new Node(value);
+  public void define(K key, V value) {
+	KeyValuePair<K, V> kvp = new KeyValuePair<>(key, value);
+	Node newNode = new Node(kvp);
 	Node previous = null, tmp = root;
 	while (tmp != null) {
 	  previous = tmp;
-	  int compareResult = value.compareTo(tmp.value);
+	  int compareResult = key.compareTo(tmp.value.getKey());
 	  if (compareResult == 0) {
 		return;
 	  }
@@ -70,7 +72,7 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 	  root = newNode;
 	  return;
 	}
-	if (value.compareTo(previous.value) < 0) {
+	if (key.compareTo(previous.value.getKey()) < 0) {
 	  previous.left = newNode;
 	  newNode.parent = previous;
 	} else {
@@ -80,33 +82,35 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
   }
 
   @Override
-  public boolean contains(T value) {
-	Node node = find(value);
-	return node != null;
+  public V getValue(K key) {
+	Node node = find(key);
+	if (node == null)
+	  return null;
+	return node.value.getValue();
   }
 
   @Override
-  public boolean remove(T value) {
-	Node node = find(value);
+  public V remove(K key) {
+	Node node = find(key);
 	if (node == null) {
-	  return false;
+	  return null;
 	}
 	removeHelper(node);
 	size--;
-	return true;
+	return node.value.getValue();
   }
 
   @Override
-  public T removeAny() throws Exception {
+  public KeyValuePair<K, V> removeAny() throws Exception {
 	if (root == null) {
 	  if (size != 0) {
 		throw new Exception("Something really bad happened");
 	  }
 	  throw new Exception("Set is empty");
 	}
-	T result = root.value;
-	remove(result);
-	return result;
+	KeyValuePair<K, V> kvp = root.value;
+	remove(kvp.getKey());
+	return kvp;
   }
 
   @Override
@@ -119,17 +123,19 @@ public class BSTSet<T extends Comparable<? super T>> implements Set<T> {
 	root = null;
 	size = 0;
   }
+  
 
   @Override
   public String toString() {
 //	return out(root, 0) + "[" + root + "]";
-	return "[" + (root == null ? "" : root) + "(" + size + ")]";
+//	return "[" + (root == null ? "" : root) + "(" + size + ")]";
+	return "[" + (root == null ? "" : root) + "]";
   }
 
-  private Node find(T value) {
+  private Node find(K key) {
 	Node cur = root;
 	while (cur != null) {
-	  int compareResult = value.compareTo(cur.value);
+	  int compareResult = key.compareTo(cur.value.getKey());
 	  if (compareResult == 0) {
 		return cur;
 	  }

@@ -26,13 +26,13 @@ public class LinkedListSortedQueue<T extends Comparable<? super T>> implements S
   @Override
   public void insert(T value) {
 	size++;
-	LLNode<T> newNode = new LLNode<T>(value);
+	LLNode<T> newNode = new LLNode<>(value);
 	if (size == 1) {
 	  head = newNode;
 	  return;
 	}
 	if (value.compareTo(head.getValue()) <= 0) {
-	  System.out.println("!");
+//	  System.out.println("!");
 	  newNode.setNext(head);
 	  head = newNode;
 	  return;
@@ -47,7 +47,6 @@ public class LinkedListSortedQueue<T extends Comparable<? super T>> implements S
 	  tmp = tmp.getNext();
 	}
 	tmp.setNext(newNode);
-//	throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override

@@ -5,9 +5,9 @@
  */
 package lab12;
 
-import ToolBox.ADTs.Set.impl.BSTHashTable;
+import ToolBox.ADTs.Set.impl.BSTHashTableSet;
 import ToolBox.ADTs.Set.impl.HashTableSet;
-import ToolBox.ADTs.Set.impl.LLQSHashTable;
+import ToolBox.ADTs.Set.impl.LLQSHashTableSet;
 import java.util.Random;
 
 /**
@@ -21,8 +21,8 @@ public class HashTableTester {
 	int N = 25 * 1000;
 	int[] addData = new int[N];
 	int[] containsData = new int[N];
-	HashTableSet<Integer> qSet = new LLQSHashTable<>();
-	HashTableSet<Integer> bstSet = new BSTHashTable<>();
+	HashTableSet<Integer> qSet = new LLQSHashTableSet<>();
+	HashTableSet<Integer> bstSet = new BSTHashTableSet<>();
 	long[] res;
 
 //	for (int i = 0; i < N; i++) {

@@ -6,7 +6,8 @@
 package testers;
 
 import ToolBox.ADTs.Map.Map;
-import ToolBox.ADTs.Map.impl.LLQueueMap;
+import ToolBox.ADTs.Map.impl.BSTMap;
+import ToolBox.ADTs.Map.impl.LLQHashTableMap;
 
 /**
  *
@@ -15,7 +16,7 @@ import ToolBox.ADTs.Map.impl.LLQueueMap;
 public class MapTester {
 
   public static void main(String[] args) {
-	Map<Integer, String> map = new LLQueueMap<>();
+	Map<Integer, String> map = new LLQHashTableMap<>();
 	try {
 	  map.removeAny();
 	} catch (Exception ex) {

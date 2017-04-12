@@ -6,8 +6,8 @@
 package testers;
 
 import ToolBox.ADTs.Set.Set;
-import ToolBox.ADTs.Set.impl.LLQSHashTable;
-import ToolBox.ADTs.Set.impl.BSTHashTable;
+import ToolBox.ADTs.Set.impl.LLQSHashTableSet;
+import ToolBox.ADTs.Set.impl.BSTHashTableSet;
 
 /**
  *
@@ -17,7 +17,7 @@ public class SetTester {
 
   public static void main(String[] args) throws Exception {
 	Set<Integer> set;
-	set = new BSTHashTable<>();
+	set = new BSTHashTableSet<>();
 
 	int N = 10;
 	int maxVal = N * 2;
