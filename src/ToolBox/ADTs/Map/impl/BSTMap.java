@@ -48,7 +48,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 	root = null;
 	size = 0;
   }
-  
+
   @Override
   public void define(K key, V value) {
 	KeyValuePair<K, V> kvp = new KeyValuePair<>(key, value);
@@ -84,8 +84,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
   @Override
   public V getValue(K key) {
 	Node node = find(key);
-	if (node == null)
+	if (node == null) {
 	  return null;
+	}
 	return node.value.getValue();
   }
 
@@ -123,7 +124,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 	root = null;
 	size = 0;
   }
-  
 
   @Override
   public String toString() {
@@ -132,6 +132,12 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 	return "[" + (root == null ? "" : root) + "]";
   }
 
+  public String getElements() {
+	if (root == null)
+	  return "";
+	return root + "";
+  }
+  
   private Node find(K key) {
 	Node cur = root;
 	while (cur != null) {

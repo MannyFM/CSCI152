@@ -5,9 +5,6 @@
  */
 package ToolBox.ADTs.Set.impl;
 
-import ToolBox.ADTs.Set.Set;
-import ToolBox.util.HashTableStats;
-
 /**
  *
  * @author manny

@@ -5,8 +5,6 @@
  */
 package ToolBox.ADTs.Set.impl;
 
-import ToolBox.ADTs.Set.Set;
-
 /**
  *
  * @author manny
