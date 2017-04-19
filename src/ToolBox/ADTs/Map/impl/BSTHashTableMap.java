@@ -10,10 +10,12 @@ import ToolBox.util.KeyValuePair;
 /**
  *
  * @author manny
+ * @param <K>
+ * @param <V>
  */
 public class BSTHashTableMap<K extends Comparable<K>, V> implements HashTableMap<K, V> {
 
-  private BSTMap<K, V>[] buckets;
+  private final BSTMap<K, V>[] buckets;
   private int numberOfBuckets;
   private int size;
   
